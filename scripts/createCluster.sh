@@ -10,3 +10,5 @@ az aks create \
   --min-count 1 \
   --max-count 3 \
   --cluster-autoscaler-profile scan-interval=30s
+
+az aks get-credentials --name scaledAKSCluster -g aks-scaling-demo --overwrite
