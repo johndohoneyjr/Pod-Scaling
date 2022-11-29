@@ -25,4 +25,31 @@ Now check
 ```
 kubectl get hpa php-apache --watch
 ```
+# Cluster Auto-Scaling
 
+```
+# Create a dedicated namespace
+kubectl create namespace scaling-demo
+
+# Deploy the application to AKS
+kubectl apply -f https://raw.githubusercontent.com/johndohoneyjr/Pod-Scaling/main/manifests/cluster-scale.yaml -n scaling-demo
+
+kubectl scale deploy/demo -n scaling-demo --replicas 400
+
+# In one terminal - watch pods scale
+kubectl get po -n scaling-demo -w
+
+# In another termina watch nodes scale
+kubectl get nodes -w
+
+#in another terminal, watch the load balance
+kubectl top nodes
+```
+## Scale Down
+```
+kubectl scale deploy/demo -n scaling-demo --replicas 4
+
+##
+# Speed up scale down
+az aks update -g aks-scaling-demo -n scaledAKSCluster --cluster-autoscaler-profile scale-down-delay-after-delete=30s scale-down-unneeded-time=1m
+```
