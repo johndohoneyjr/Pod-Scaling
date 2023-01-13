@@ -2,6 +2,8 @@
 
 az login
 
+az group create  --location westus --resource-group aks-scaling-demo
+
 az aks create \
   --resource-group aks-scaling-demo \
   --name scaledAKSCluster \
@@ -13,7 +15,5 @@ az aks create \
   --cluster-autoscaler-profile scan-interval=30s \
   --windows-admin-password <your admin password> 
   --windows-admin-username <your admin username>
-
-
 
 az aks get-credentials --name scaledAKSCluster -g aks-scaling-demo --overwrite
