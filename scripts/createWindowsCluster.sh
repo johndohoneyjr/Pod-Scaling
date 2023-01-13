@@ -17,4 +17,13 @@ az aks create \
   --windows-admin-password <your admin password - 14 chars minimum> \
   --windows-admin-username <your admin username>
 
+az aks nodepool add  \
+  --resource-group aks-scaling-demo  \
+  --cluster-name scaledAKSCluster   \
+  --os-type Windows   \
+  --os-sku Windows2019 \
+  --name npwin \
+  --node-count 1 \
+  --node-vm-size standard_d11_v2
+
 az aks get-credentials --name scaledAKSCluster -g aks-scaling-demo --overwrite
